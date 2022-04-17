@@ -2,10 +2,10 @@ POST http://localhost:3000/register
 Content-Type: application/json
 
 {
-  "username": "sneha_sharma",
-  "name": "Sneha Sharma",
-  "password": "sneha@159",
-  "gender": "female",
+  "username": "praneeth_teja",
+  "name": "Praneeth Teja",
+  "password": "neethu@156",
+  "gender": "male",
   "location": "Delhi"
 }
 ###
@@ -14,8 +14,8 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-  "username": "sneha_sharma",
-  "password": "sneha@159"
+  "username": "praneeth_teja",
+  "password": "neethu@156"
 }
 ###
 
@@ -23,7 +23,7 @@ PUT http://localhost:3000/change-password
 Content-Type: application/json
 
 {
-  "username": "sneha_sharma",
-  "oldPassword": "sneha@159",
-  "newPassword": "sneha@143"
+  "username": "praneeth_teja",
+  "oldPassword": "neethu@156",
+  "newPassword": "neethu@153"
 }
