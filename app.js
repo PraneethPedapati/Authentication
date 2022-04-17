@@ -48,9 +48,10 @@ app.post("/register", async (request, response) => {
     } else {
       let addUserQuery = `
             INSERT INTO user
-            (username, name, password, gender, location )
-            VALUES ("${username}", "${name}", "${hashedPassword}", "${gender}", "${location}",)
+            (username, name, password, gender, location)
+            VALUES ("${username}", "${name}", "${hashedPassword}", "${gender}", "${location}");
         `;
+      await db.run(addUserQuery);
       response.status(200);
       response.send("User created successfully");
     }
@@ -96,12 +97,11 @@ app.put("/change-password", async (request, response) => {
   let dbUser = await db.get(checkUserQuery);
 
   if (dbUser === undefined) {
-    console.log(dbUser);
     response.status(400);
     response.send("Invalid user");
   } else {
     let isPasswordMatched = await bcrypt.compare(oldPassword, dbUser.password);
-    if (isPasswordMatched) {
+    if (isPasswordMatched === true) {
       if (newPassword.length < 5) {
         response.status(400);
         response.send("Password is too short");
@@ -109,7 +109,7 @@ app.put("/change-password", async (request, response) => {
         let newHashedPassword = await bcrypt.hash(newPassword, 10);
         let updatePasswordQuery = `
                 UPDATE user
-                SET password = "${newHashedPassword}
+                SET password = "${newHashedPassword}"
                 WHERE username = "${username}";
             `;
 
@@ -119,7 +119,8 @@ app.put("/change-password", async (request, response) => {
       }
     } else {
       response.status(400);
-      response.status("Invalid current password");
+      response.send("Invalid current password");
     }
   }
 });
+
